@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+/*
+  Brand palette
+  jet      #0a0a0a  -> page background
+  cerulean #007ba7  -> primary / information (cerulean-400 used for small text: better contrast on black)
+  rose     #ff2d95  -> accent / call to action / live state
+*/
+@theme {
+  --color-jet: #0a0a0a;
+  --color-jet-900: #0a0a0a;
+  --color-jet-800: #111111;
+  --color-jet-700: #171717;
+  --color-jet-600: #1f1f1f;
+  --color-jet-500: #2a2a2a;
+
+  --color-cerulean: #007ba7;
+  --color-cerulean-300: #5cc4ec;
+  --color-cerulean-400: #26a6d9;
+  --color-cerulean-500: #007ba7;
+  --color-cerulean-600: #006a90;
+  --color-cerulean-700: #00566f;
+
+  --color-rose: #ff2d95;
+  --color-rose-300: #ff7dbc;
+  --color-rose-400: #ff4fa6;
+  --color-rose-500: #ff2d95;
+  --color-rose-600: #e01f7f;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Space Grotesk", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+  --animate-flow: flow 6s linear infinite;
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+  @keyframes flow {
+    from { background-position: 0% 50%; }
+    to { background-position: 200% 50%; }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  html, body, #root {
+    min-height: 100%;
+  }
+
+  body {
+    @apply bg-jet text-neutral-200 font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-rose/40 text-white;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-cerulean-400;
+  }
+
+  select option {
+    @apply bg-jet-700 text-neutral-200;
+  }
+}
+
+@layer components {
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-cerulean-400 via-cerulean-300 to-rose bg-clip-text text-transparent;
+  }
+
+  .border-gradient {
+    background:
+      linear-gradient(var(--color-jet-800), var(--color-jet-800)) padding-box,
+      linear-gradient(120deg, var(--color-cerulean), var(--color-rose)) border-box;
+    border: 1px solid transparent;
+  }
+
+  /* Thin, dark scrollbars for log / code panes */
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-jet-500) transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

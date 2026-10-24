@@ -1,0 +1,20 @@
+# Secrets
+.env
+backend/.env
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Generated at runtime
+backend/data/
+backend/output/*
+!backend/output/.gitkeep
+
+# Node
+frontend/node_modules/
+frontend/dist/
+*.log
