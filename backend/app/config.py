@@ -93,7 +93,15 @@ class Settings(BaseSettings):
 
     @property
     def frontend_origins(self) -> list[str]:
-        return [o.strip() for o in self.frontend_origin.split(",") if o.strip()]
+        origins = []
+        for o in self.frontend_origin.split(","):
+            cleaned = o.strip()
+            if not cleaned:
+                continue
+            if cleaned != "*":
+                cleaned = cleaned.rstrip("/")
+            origins.append(cleaned)
+        return origins or ["*"]
 
     def provider_configured(self, provider: str) -> bool:
         provider = (provider or "").lower()
